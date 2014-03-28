@@ -314,7 +314,33 @@ var linkedinApis = (function() {
         }
       });
     },
-    
+    getJobSuggestions : function(callback){
+      if (navigator.onLine) {
+        var format;
+        if (APICalls['myJobSuggestions'].indexOf("?") >= 0) {
+          format = "&format=json";
+        }
+        else {
+          format = "?format=json";
+        }
+        var url ='https://api.linkedin.com/v1/' + APICalls['myJobSuggestions'] + format;  
+          xhrWithAuth('GET', url,  interactive, function(error, status, response){
+            if (error) {
+              callback(error);
+            }else{
+              var data = JSON.parse(response);
+              callback(null , data);
+
+              storeInChrome({"job-suggestions" : data});
+            }
+          });
+      }else{
+        getFromChrome("myJobSuggestions" , function(jobs){
+          callback(null , jobs);
+        });
+      }
+    },
+        
     getFeeds : function(callback){
       if (navigator.onLine) {
         var format;
