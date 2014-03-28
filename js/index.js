@@ -49,6 +49,10 @@ var linkedinApis = (function() {
   APICalls['jobDetails'] = 'jobs/1452577:(id,company:(name),position:(title))';
   APICalls['jobSearch'] = 'job-search:(jobs,facets)?facet=location,us:84';
 
+  //POST Updates
+
+  APICalls['share'] = 'people/~/shares';
+
   var RandomState = function(howLong) {
     howLong=parseInt(howLong);
     if (!howLong || howLong<=0) {
@@ -168,7 +172,7 @@ var linkedinApis = (function() {
     }
   })();
 
-  function xhrWithAuth(method, url, interactive, callback , callbackEXt) {
+  function xhrWithAuth(method, url, interactive, callback , postData) {
     var retry = true;
     var access_token;
 
@@ -191,9 +195,15 @@ var linkedinApis = (function() {
     function requestStart(finalUrl) {
       var xhr = new XMLHttpRequest();
       xhr.open(method, finalUrl);
-      //xhr.setRequestHeader('Authorization', 'Bearer ' + access_token);
+      if (method === "POST") {
+        xhr.setRequestHeader('Content-Type', 'application/xml');
+      };
       xhr.onload = requestComplete;
-      xhr.send();
+      if (postData) {
+        xhr.send(postData);
+      }else{
+        xhr.send();
+      }
     }
 
     function requestComplete() {
@@ -204,7 +214,7 @@ var linkedinApis = (function() {
         access_token = null;
         getToken();
       } else {
-        callback(null, this.status, this.response , callbackEXt);
+        callback(null, this.status, this.response);
       }
     }
   }
@@ -310,9 +320,46 @@ var linkedinApis = (function() {
           format = "?format=json";
         }
         var url ='https://api.linkedin.com/v1/' + APICalls['myProfile'] + format;  
-        xhrWithAuth('GET', url,  interactive, onUserInfoFetched , callback);
+        xhrWithAuth('GET', url,  interactive, function(error, status, response){
+            if (!error && status == 200) {
+              console.log("Got the following user info: " + response);
+              var user_info = JSON.parse(response);
+              populateUserInfo(user_info);
+              callback(user_info);
+            } else {
+              console.log('infoFetch failed', error, status);
+              showButton(signin_button);
+            }
+          });
         }
       });
+    },
+    postShare : function(postData , callback){
+      var xmlData = '<share>' +
+                      '<comment>'+postData.comment +'</comment>'
+                      '<content>'+
+                        '<title>'+postData.title+'</title>'+
+                        '<description>'postData.description +'</description>'+
+                        '<submitted-url>'+postData.commentUrl+'/submitted-url>'+
+                        '<submitted-image-url>'+postData.imageUrl+'</submitted-image-url>'+ 
+                      '</content>'+
+                      '<visibility>'+ 
+                        '<code>anyone</code>'+ 
+                      '</visibility>'+
+                    '</share>';
+      if (navigator.onLine) {
+        var url ='https://api.linkedin.com/v1/' + APICalls['share'];  
+          xhrWithAuth('POST', url,  interactive, function(error, status, response){
+            if (error) {
+              callback(error);
+            }else{
+              var data = JSON.parse(response);
+              callback(null , data);
+            }
+          },xmlData);
+      }else{
+        storeInChrome({"share" : xmlData});
+      }
     },
     getJobSuggestions : function(callback){
       if (navigator.onLine) {
@@ -340,7 +387,7 @@ var linkedinApis = (function() {
         });
       }
     },
-        
+
     getFeeds : function(callback){
       if (navigator.onLine) {
         var format;
