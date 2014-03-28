@@ -8,7 +8,9 @@ LinkedIn = {
 require(["backbone",
         "jquery",
         "keymaster",
-        "underscore"], function(Backbone, $, key, _) {
+        "underscore",
+        "corgi",
+        "bootstrap"], function(Backbone, $, key, _) {
 
 var StartUp = Backbone.View.extend({
     el : "body",
