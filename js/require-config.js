@@ -8,7 +8,8 @@ var require = {
       jquery : "js/lib/jquery",
       bootstrap: "js/bootstrap.min",
       keymaster: "js/lib/keymaster",
-      corgi: "js/corgi"
+      corgi: "js/corgi",
+      bootstraphoverdropdown: "js/lib/bootstrap-hover-dropdown"
     },
 
     shim : {

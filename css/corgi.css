@@ -6,13 +6,15 @@ body {
 	background: url("../img/billie_holiday.png") repeat;
 }
 .navbar-inner {
-	padding-top:10px;
+	padding:0px;
 	background-image:none;
 	background-color:#111;
-	height:49px;
+	/*height:49px;*/
+	height: 40px;
 	border:none;
 	opacity:0.9;
 	filter:none;
+	background-image: -webkit-linear-gradient(top, #696969 0%,#3f3f3f 100%);
 }
 .navbar .brand {
 	font-family: 'Raleway', sans-serif;
@@ -22,7 +24,7 @@ body {
 	color: #eee;
 	text-shadow: 0 2px 0 #000;
 }
-.navbar .nav > .active > a, .navbar .nav > .active > a:hover, .navbar .nav > .active > a:focus {
+/*.navbar .nav > .active > a, .navbar .nav > .active > a:hover, .navbar .nav > .active > a:focus {
 	color: #eee;
 	text-decoration: none;
 	background-color: #222;
@@ -43,7 +45,7 @@ body {
 }
 .navbar .nav > li > a:hover {
 	color:#0088cc;
-}
+}*/
 .collapse {
 	background-color:#333;
 }
@@ -271,4 +273,76 @@ body {
 }
 .elusive_icons li {
 	list-style-type:none;
+}
+.nav > li {
+	width: 43px;
+	height: 42px;
+	padding: 0 4px 0 4px;
+	color: black;
+	margin: 0 5px 0 5px;
+	background: none;
+}
+.navbar .nav > li > a {
+	padding: 10px 10px 7px 10px;
+	width: 23px;
+	height:20px;
+	color: rgb(13, 99, 143);
+	margin: 0 0 0 0;
+	background: none;
+	box-shadow: none;
+	border: none;
+}
+.navbar .nav > li > a > i {
+	width: 23px;
+	height: 14px;
+	color: rgb(138, 138, 138);
+	font-size: 18px;
+	line-height: 14px;
+	background: rgba(0, 0, 0, 0);
+	margin: 0 0 0 0;
+}
+#in-logo {
+	background: url("../img/logo_in_nav_retina_88x72.png") no-repeat;
+-webkit-background-clip: border-box;
+-webkit-background-origin: padding-box;
+-webkit-background-size: 44px 36px;
+background-attachment: scroll;
+background-clip: border-box;
+background-color: rgba(0, 0, 0, 0);
+background-origin: padding-box;
+background-size: 44px 36px;
+border-bottom-color: rgb(0, 102, 153);
+border-bottom-style: none;
+border-bottom-width: 0px;
+border-image-outset: 0px;
+border-image-repeat: stretch;
+border-image-slice: 100%;
+border-image-source: none;
+border-image-width: 1;
+border-left-color: rgb(0, 102, 153);
+border-right-color: rgb(0, 102, 153);
+border-top-color: rgb(0, 102, 153);
+color: rgb(0, 102, 153);
+cursor: auto;
+display: block;
+float: left;
+font-family: Helvetica, Arial, sans-serif;
+font-size: 13px;
+font-style: normal;
+font-weight: normal;
+height: 36px;
+left: -1px;
+line-height: 17px;
+margin: 0 5px  0 3px;
+outline-color: rgb(0, 102, 153);
+outline-width: 0px;
+overflow: hidden;
+padding: 0;
+position: relative;
+text-align: left;
+text-decoration: none solid rgb(0, 102, 153);
+text-indent: -119988px;
+vertical-align: baseline;
+width: 44px;
+
 }
