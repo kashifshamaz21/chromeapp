@@ -1,6 +1,6 @@
 var gh = (function() {
   'use strict';
-
+  
   var signin_button;
   var revoke_button;
   var user_info_div;
@@ -246,13 +246,9 @@ var gh = (function() {
     });
   }
 
-  function fetFromChrome (key , callback) {
+  function getFromChrome (key) {
       chrome.storage.local.get(key, function(data) {
-        if (callback) {
-          callback(data[key])
-        }else{
-          return data.key;
-        }
+        callback(data[key])
       });
   }
 
@@ -294,12 +290,7 @@ var gh = (function() {
   }
 
   function revokeToken() {
-    // We are opening the web page that allows user to revoke their token.
     window.open('https://github.com/settings/applications');
-    // And then clear the user interface, showing the Sign in button only.
-    // If the user revokes the app authorization, they will be prompted to log
-    // in again. If the user dismissed the page they were presented with,
-    // Sign in button will simply sign them in.
     user_info_div.textContent = '';
     hideButton(revoke_button);
     showButton(signin_button);
@@ -323,6 +314,62 @@ var gh = (function() {
         }
       });
     },
+    
+    getFeeds : function(callback){
+      if (navigator.onLine) {
+        var format;
+        if (APICalls['myNetworksUpdates'].indexOf("?") >= 0) {
+          format = "&format=json";
+        }
+        else {
+          format = "?format=json";
+        }
+        var url ='https://api.linkedin.com/v1/' + APICalls['myNetworksUpdates'] + format;  
+          xhrWithAuth('GET', url,  interactive, function(error, this.status, this.response){
+            if (error) {
+              callback(error);
+            }else{
+              var data = JSON.parse(response);
+              callback(null , data);
+
+              storeInChrome({"feeds" : data});
+            }
+          });
+      }else{
+        getFromChrome("feeds" , function(feeds){
+          callback(null , feeds);
+        });
+      }
+    },
+
+    getConnections : function(callback){
+        if (navigator.onLine) {
+        var format;
+        if (APICalls['myConnections'].indexOf("?") >= 0) {
+          format = "&format=json";
+        }
+        else {
+          format = "?format=json";
+        }
+        var url ='https://api.linkedin.com/v1/' + APICalls['myConnections'] + format;  
+          xhrWithAuth('GET', url,  interactive, function(error, this.status, this.response){
+            if (error) {
+              callback(error);
+            }else{
+              var data = JSON.parse(response);
+              callback(null , data);
+
+              storeInChrome({"connections" : data});
+            }
+          });
+      }else{
+        getFromChrome("connections" , function(connections){
+          callback(null , connections);
+        });
+      }
+    }
+
+    
     onload: function () {
       signin_button = document.querySelector('#signin');
       signin_button.onclick = interactiveSignIn;
