@@ -339,7 +339,7 @@ var linkedinApis = (function() {
                       '<comment>'+postData.comment +'</comment>'
                       '<content>'+
                         '<title>'+postData.title+'</title>'+
-                        '<description>'postData.description +'</description>'+
+                        '<description>'+postData.description +'</description>'+
                         '<submitted-url>'+postData.commentUrl+'/submitted-url>'+
                         '<submitted-image-url>'+postData.imageUrl+'</submitted-image-url>'+ 
                       '</content>'+
