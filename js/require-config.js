@@ -9,7 +9,15 @@ var require = {
       bootstrap: "js/bootstrap.min",
       keymaster: "js/lib/keymaster",
       corgi: "js/corgi",
-      bootstraphoverdropdown: "js/lib/bootstrap-hover-dropdown"
+      bootstraphoverdropdown: "js/lib/bootstrap-hover-dropdown",
+      models: "js/models",
+      views: "js/views",
+      collections: "js/collections",
+      templates: "js/templates",
+      util: "js/util",
+      text: "js/lib/text",
+      slimscroll: "js/lib/slimscroll",
+      moment: "js/lib/moment"
     },
 
     shim : {
@@ -21,6 +29,9 @@ var require = {
             exports : "Backbone"
         },
         bootstrap: {
+            deps: ["jquery"]
+        },
+        slimscroll: {
             deps: ["jquery"]
         },
         underscore: {
