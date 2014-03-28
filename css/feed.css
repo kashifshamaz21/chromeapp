@@ -1,0 +1,24 @@
+#bootstrap-container {
+	display: none;
+}
+
+#user-feed-wrapper {
+	min-height: 700px;
+}
+.feed_text {
+	font-size: 14px;
+}
+
+.anchor {
+	color: #0088cc;
+	cursor: pointer;
+}
+
+.bottom_right span {
+	color: #999;
+}
+
+.bottom_meta {
+	padding-bottom: 10px;
+	margin-top: -15px;
+}

@@ -6,7 +6,15 @@ define(["jquery",
             return $.ajax.apply($, arguments);
     };
     var UserFeed = Backbone.Model.extend({
-        
+       initialize: function  (argument) {
+           
+       } 
+    }, {
+        translateJobUpdate: function  (update) {
+            return {
+
+            }
+        }
     });
     return UserFeed;
 });
