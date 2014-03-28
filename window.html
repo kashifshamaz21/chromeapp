@@ -28,6 +28,11 @@
 	</style>
   </head>
   <body>
+    <div class="login-frame"> 
+        <div id="signin"></div>
+        <div id="revoke"></div>
+        <div id="user_info"></div>
+    </div>
 	<div class="navbar navbar-fixed-top">
 	  <div class="navbar-inner">
 		<div class="container">
@@ -38,6 +43,29 @@
 		  </button>
 		  <a class="brand" id="in-logo" href="#">Corgi</a>
 		  <div class="nav-collapse collapse">
+            <ul class="search-container">
+                <li class="dropdown search-entitiy">
+                    <a class="btn dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"><i class="fa fa-toggle-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a tabindex="-1" href="#">All</a></li>
+                        <li><a tabindex="-1" href="#">People</a></li>
+                        <li><a tabindex="-1" href="#">Jobs</a></li>
+                        <li><a tabindex="-1" href="#">Companies</a></li>
+                        <li><a tabindex="-1" href="#">Groups</a></li>
+                        <li><a tabindex="-1" href="#">Universities</a></li>
+                        <li><a tabindex="-1" href="#">Articles</a></li>
+                        <li><a tabindex="-1" href="#">Inbox</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <input name="keywords" id="main-search-box" class="search-term" type="text" value="" autocomplete="off" placeholder="Search for people, jobs, companies, and more...">
+                </li>
+                <li>
+                    <button name="search" value="Search" class="search-button">
+                    <i class="fa fa-search"></i>
+                    </button>
+                </li>
+            </ul>
 			<ul class="nav pull-right">
 			  <li class="dropdown">
 				<a class="btn dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"><i class="fa fa-envelope-o"></i></a>

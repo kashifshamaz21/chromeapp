@@ -344,5 +344,83 @@ text-decoration: none solid rgb(0, 102, 153);
 text-indent: -119988px;
 vertical-align: baseline;
 width: 44px;
-
+}
+.search-container {
+	float: left;
+}
+.search-container li {
+	display: inline-block;
+	margin: 0;
+	padding: 0;
+	top: -8px;
+	height: 20px;
+	margin-top: 4px;
+}
+.search-container li button {
+	-webkit-appearance: none;
+-webkit-background-clip: border-box;
+-webkit-background-origin: padding-box;
+-webkit-background-size: auto;
+-webkit-writing-mode: horizontal-tb;
+align-items: flex-start;
+background-attachment: scroll;
+background-clip: border-box;
+background-color: rgb(40, 123, 188);
+background-image: -webkit-linear-gradient(top, rgb(40, 123, 188) 0%, rgb(35, 99, 154) 100%);
+background-origin: padding-box;
+background-size: auto;
+border-bottom-color: rgb(27, 84, 128);
+border-bottom-left-radius: 3px;
+border-bottom-right-radius: 3px;
+border-bottom-style: solid;
+border-bottom-width: 1px;
+border-image-outset: 0px;
+border-image-repeat: stretch;
+border-image-slice: 100%;
+border-image-source: none;
+border-image-width: 1;
+border-left-color: rgb(27, 84, 128);
+border-left-style: solid;
+border-left-width: 1px;
+border-right-color: rgb(27, 84, 128);
+border-right-style: solid;
+border-right-width: 1px;
+border-top-color: rgb(27, 84, 128);
+border-top-left-radius: 3px;
+border-top-right-radius: 3px;
+border-top-style: solid;
+border-top-width: 1px;
+box-sizing: border-box;
+color: rgb(255, 255, 255);
+cursor: pointer;
+float: right;
+font-family: Helvetica, Arial, sans-serif;
+font-size: 13px;
+font-style: normal;
+font-weight: bold;
+letter-spacing: normal;
+margin-bottom: 0px;
+margin-right: 5px;
+padding-bottom: 0px;
+padding-left: 3px;
+padding-right: 3px;
+padding-top: 0px;
+text-decoration: none solid rgb(255, 255, 255);
+text-shadow: rgba(0, 0, 0, 0.34902) 0px 1px 1px;
+text-transform: none;
+vertical-align: middle;
+white-space: nowrap;
+width: 50px;
+word-spacing: 0px;
+writing-mode: lr-tb;
+zoom: 1;
+}
+.search-container li input {
+	width: 320px;
+}
+.search-container {
+	margin-left: 130px;
+}
+.search-container .dropdown-menu li {
+	display: block;
 }

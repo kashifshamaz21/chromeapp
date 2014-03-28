@@ -325,7 +325,7 @@ var gh = (function() {
           format = "?format=json";
         }
         var url ='https://api.linkedin.com/v1/' + APICalls['myNetworksUpdates'] + format;  
-          xhrWithAuth('GET', url,  interactive, function(error, this.status, this.response){
+          xhrWithAuth('GET', url,  interactive, function(error, status, response){
             if (error) {
               callback(error);
             }else{
@@ -352,7 +352,7 @@ var gh = (function() {
           format = "?format=json";
         }
         var url ='https://api.linkedin.com/v1/' + APICalls['myConnections'] + format;  
-          xhrWithAuth('GET', url,  interactive, function(error, this.status, this.response){
+          xhrWithAuth('GET', url,  interactive, function(error, status, response){
             if (error) {
               callback(error);
             }else{
@@ -367,8 +367,7 @@ var gh = (function() {
           callback(null , connections);
         });
       }
-    }
-
+    },
     
     onload: function () {
       signin_button = document.querySelector('#signin');
