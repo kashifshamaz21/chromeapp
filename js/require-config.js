@@ -19,7 +19,6 @@ var require = {
       slimscroll: "js/lib/slimscroll",
       moment: "js/lib/moment"
     },
-
     shim : {
         jquery: {
           exports: "$"

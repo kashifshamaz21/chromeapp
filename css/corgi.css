@@ -424,3 +424,17 @@ zoom: 1;
 .search-container .dropdown-menu li {
 	display: block;
 }
+.login-frame {
+	display: none;
+	min-height: 800px;
+	background: transparent;
+}
+.login-frame #revoke, .login-frame #user_info {
+	display: none;
+}
+.login-frame #signin {
+	width: 45px;
+	height: 10px;
+	display: block;
+	background: blue;
+}
