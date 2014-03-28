@@ -1,0 +1,195 @@
+
+body {
+    margin-top: 0;
+}
+
+h1 {
+    color: #999999;
+}
+
+#header {
+    height: 100px;
+}
+
+#logo {
+    height: 80px;
+    background: #FFFFFF url('images/main-sprite.png') no-repeat 0 -50px;
+    margin: 0;
+    padding: 0;
+}
+
+#content {
+    height: 380px;
+}
+
+#footer {
+    border-top: 1px solid #999999;
+    padding-top: 10px;
+    margin-top: 20px;
+}
+
+#save_area {
+    width: 117px; /* Fix the 960gs right margin lame-ness */
+}
+
+#footer ul, #header ul {
+    list-style-type: none;
+    margin: 5px 0 0 0;
+    padding: 0;
+}
+
+#header ul {
+    margin-top: 20px;
+    float: right;
+}
+
+#footer ul > li, #header ul > li {
+    display: inline;
+    margin-right: 20px;
+}
+
+.input_container {
+    position: relative;
+}
+
+.status {
+    font-family: 'ProximaNovaBold';
+    text-align: right;
+    color: #339933;
+    line-height: 40px;
+}
+
+button {
+    min-width: 100%;
+}
+
+.omega.status {
+    padding-top: 30px; /* quick hack */
+    text-align: right;
+}
+
+.modal {
+    display: none;
+    margin: 0 auto 0 auto;
+    padding: 20px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    border: 1px solid #EAEAEA;
+    background-color: #FFFFFF;
+}
+
+#SettingsInviteCustom {
+    width: 420px;
+    height: 80px;
+}
+
+#SettingsInviteCustom::-webkit-input-placeholder {
+    font-size: 14px;
+    font-family: 'ProximaNovaLight';
+}
+
+#view_invite_mock_modal {
+    width: 650px;
+    height: 580px;
+    background-color: #FFFFFF;
+}
+
+#view_invite_mock_btn {
+    display: inline-block;
+    text-indent: 35px;
+    background: #FFFFFF url('images/main-sprite.png') no-repeat -200px 3px;
+}
+
+#view_invite_mock_modal h2 {
+    margin-top: 0;
+}
+
+#mock_container {
+    background: #FFFFFF url('images/main-sprite.png') no-repeat 0 -270px;
+    min-height: 490px;
+    position: relative;
+}
+
+#mock_container textarea {
+    width: 530px;
+    min-height: 310px;
+    position: absolute;
+    top: 165px;
+    left: 106px;
+    border-color: #CCCCCC;
+    font-size: 13px;
+}
+
+#close_mock {
+    float: right;
+    margin: 8px 10px 0 0;
+    min-width: 100px;
+}
+
+/** --------Sync Settings Modal ---------------*/
+.options-modal {
+    width: 370px;
+    min-height: 270px;		
+}
+
+.options-modal button, #sync_settings_btn, #sync_settings_btn_dev {
+    display: inline-block;
+    -webkit-box-shadow: none;
+}
+
+.options-modal .button2 {
+    min-width: 120px;
+}
+
+.options-modal .button1 {
+    min-width: 150px;
+}
+
+.options-modal .input_container > label {
+    width: 140px;
+}
+
+.options-modal .input_container > input {
+    left: 164px;
+    width: 200px;
+}
+
+#sync_error_container {
+    text-align: center;
+    margin-top: 5px;
+    color: #FF0000;
+}
+
+/** ------------ Reset Modal Styles ----------------*/
+#reset_confirm_modal {
+    display: none;
+    width: 283px;
+    min-height: 170px;
+    margin: 0 auto 0 auto;
+    padding: 10px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    border: 1px solid #EAEAEA;
+    background-color: #FFF;
+}
+
+#reset_confirm_modal .medium_textinput {
+    width: 234px;
+}
+
+#reset_confirm_modal button {
+    display: inline-block;
+}
+
+#reset_confirm_modal .button2 {
+    min-width: 120px;
+}
+
+#reset_confirm_modal .button3 {
+    min-width: 150px;
+}
+
+.simplemodal-overlay {
+    background-color: #000000;
+}

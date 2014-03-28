@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+  <head>
+        <title>LinkedIn</title>
+        <link rel="stylesheet" type="text/css" href="css/common.css" />
+        <link rel="stylesheet" type="text/css" href="css/all.css" />
+        <link rel="stylesheet" type="text/css" href="css/fullcalendar.css">
+        <link rel="stylesheet" type="text/css" href="css/fullcalendar.print.css">
+        <link rel="stylesheet" type="text/css" href="css/scheduling.css">
+        <link rel="stylesheet" type="text/css" href="css/skinny.css">
+        <script src="js/require-config.js" type="text/javascript"></script>
+        <script src="js/lib/require.js" data-main="js/start-up" type="text/javascript"></script>
+  </head>
+  <body>
+    <div class = "wrapper">
+        <div class = "block-header">
+            <div class="logo-wrapper">
+                <span class="linkedin-logo"></span>
+            </div>
+        </div>
+    <div id="menu" style="display: none;">
+        <div class="left-sidebar">
+            <div tabindex="1" class="launch-menu" id="instant-meeting" title="Start Instant Call"><a target="_new" id="instant_meeting"></a></div>
+            <div tabindex="2" class="launch-menu" id="schedule-meeting" title="Schedule a Meeting"><a target="_new" id="schedule_meeting" class="schedule_meeting"></a></div>
+            <div tabindex="3" class="launch-menu" id="calendar" title="View Meetings"><a target="_new" id="my_meetings"></a></div>
+            <div tabindex="4" class="launch-menu" id="playback" title="Play Videos"><a target="_new" id="playback" tabindex="-1"></a></div>
+            <div tabindex="2" class="launch-menu" id="contacts" title="View Contacts"><a target="_new" id="personal_meeting" id="contacts_list"></a></div>
+            <div tabindex="4" class="launch-menu" id="settings" title="Modify Settings"><a target="_new" id="extension_settings" tabindex="-1"></a></div>
+        </div>
+        <div class="main-container">
+            <div class="main-content">
+                <div class="features" id="uncontained_main_content" style="display: none"></div>
+                <div class="features calendar"></div>
+                <div class="features scheduling-content" style="display: none">
+                    <h1 class="page-heading"> Schedule Meeting </h1>
+                    <form class="linkedin_schedule_meeting">
+                        <div class="clear"></div>
+                        <br/>
+                        <div class="linkedin_meeting_details">
+                            <div class="input_container push up">
+                                <label for="invite_users">Users to Invite</label>
+                                <input class="invite_users" type="text" placeholder="Enter Email Addresses (in comma separated format)"/>
+                            </div>
+                            <div class="input_container">
+                                <label for="meeting_title">Meeting Title</label>
+                                <input id="meeting_title" type="text" placeholder="Enter a title for the Meeting"/>
+                            </div>
+                            <div class="input_container">
+                                <label for="meeting_description">Meeting Description</label>
+                                <input id="meeting_description" type="text" placeholder="Give a short Description of the Meeting"/>
+                            </div>
+                            <div class="select_container scheduling_timezone_container">
+                                <label for="meeting_timezone">Meeting Timezone</label>
+                                <select name="meeting_timezone" id="meeting_timezone">
+                                    <option value="Pacific/Midway">GMT-1100 Pacific/Midway</option>
+                                    <option value="US/Hawaii">GMT-1000 US/Hawaii</option>
+                                    <option value="Pacific/Marquesas">GMT-0930 Pacific/Marquesas</option>
+                                    <option value="Pacific/Gambier">GMT-0900 Pacific/Gambier</option>
+                                    <option value="US/Alaska">GMT-0900 US/Alaska</option>
+                                    <option value="US/Pacific" selected="selected">GMT-0800 US/Pacific</option>
+                                    <option value="America/Phoenix">GMT-0700 US/Mountain (Arizona)</option>
+                                    <option value="US/Mountain">GMT-0700 US/Mountain</option>
+                                    <option value="America/Belize">GMT-0600 America/Belize</option>
+                                    <option value="US/Central">GMT-0600 US/Central</option>
+                                    <option value="America/Cayman">GMT-0500 America/Cayman</option>
+                                    <option value="America/Jamaica">GMT-0500 America/Jamaica</option>
+                                    <option value="US/Eastern">GMT-0500 US/Eastern</option>
+                                    <option value="America/Barbados">GMT-0400 America/Barbados</option>
+                                    <option value="America/Halifax">GMT-0400 America/Halifax</option>
+                                    <option value="Canada/Newfoundland">GMT-0330 Canada/Newfoundland</option>
+                                    <option value="America/Argentina/Buenos_Aires">GMT-0300 America/Argentina/Buenos_Aires</option>
+                                    <option value="America/Sao_Paulo">GMT-0200 America/Sao_Paulo</option>
+                                    <option value="Africa/Abidjan">GMT+0000 Africa/Abidjan</option>
+                                    <option value="Europe/London">GMT+0000 Europe/London</option>
+                                    <option value="Europe/Paris">GMT+0100 Europe/Paris</option>
+                                    <option value="Europe/Zurich">GMT+0100 Europe/Zurich</option>
+                                    <option value="Africa/Cairo">GMT+0200 Africa/Cairo</option>
+                                    <option value="Europe/Athens">GMT+0200 Europe/Athens</option>
+                                    <option value="Europe/Istanbul">GMT+0200 Europe/Istanbul</option>
+                                    <option value="Africa/Addis_Ababa">GMT+0300 Africa/Addis_Ababa</option>
+                                    <option value="Africa/Nairobi">GMT+0300 Africa/Nairobi</option>
+                                    <option value="Antarctica/Syowa">GMT+0300 Antarctica/Syowa</option>
+                                    <option value="Asia/Kuwait">GMT+0300 Asia/Kuwait</option>
+                                    <option value="Europe/Moscow">GMT+0400 Europe/Moscow</option>
+                                    <option value="Asia/Dubai">GMT+0400 Asia/Dubai</option>
+                                    <option value="Indian/Mauritius">GMT+0400 Indian/Mauritius</option>
+                                    <option value="Asia/Kabul">GMT+0430 Asia/Kabul</option>
+                                    <option value="Asia/Karachi">GMT+0500 Asia/Karachi</option>
+                                    <option value="Asia/Kolkata">GMT+0530 Asia/Kolkata</option>
+                                    <option value="Asia/Kathmandu">GMT+0545 Asia/Kathmandu</option>
+                                    <option value="Asia/Dhaka">GMT+0600 Asia/Dhaka</option>
+                                    <option value="Asia/Rangoon">GMT+0630 Asia/Rangoon</option>
+                                    <option value="Asia/Bangkok">GMT+0700 Asia/Bangkok</option>
+                                    <option value="Asia/Ho_Chi_Minh">GMT+0700 Asia/Ho_Chi_Minh</option>
+                                    <option value="Asia/Jakarta">GMT+0700 Asia/Jakarta</option>
+                                    <option value="Asia/Phnom_Penh">GMT+0700 Asia/Phnom_Penh</option>
+                                    <option value="Asia/Hong_Kong">GMT+0800 Asia/Hong_Kong</option>
+                                    <option value="Asia/Kuala_Lumpur">GMT+0800 Asia/Kuala_Lumpur</option>
+                                    <option value="Asia/Shanghai">GMT+0800 Asia/Shanghai</option>
+                                    <option value="Asia/Singapore">GMT+0800 Asia/Singapore</option>
+                                    <option value="Asia/Taipei">GMT+0800 Asia/Taipei</option>
+                                    <option value="Australia/Perth">GMT+0800 Australia/Perth</option>
+                                    <option value="Australia/Eucla">GMT+0845 Australia/Eucla</option>
+                                    <option value="Asia/Tokyo">GMT+0900 Asia/Tokyo</option>
+                                    <option value="Australia/Darwin">GMT+0930 Australia/Darwin</option>
+                                    <option value="Asia/Vladivostok">GMT+1100 Asia/Vladivostok</option>
+                                    <option value="Australia/Brisbane">GMT+1000 Australia/Brisbane</option>
+                                    <option value="Pacific/Guam">GMT+1000 Pacific/Guam</option>
+                                    <option value="Australia/Adelaide">GMT+1030 Australia/Adelaide</option>
+                                    <option value="Australia/Sydney">GMT+1100 Australia/Sydney</option>
+                                    <option value="Pacific/Auckland">GMT+1300 Pacific/Auckland</option>
+                                    <option value="Pacific/Fiji">GMT+1300 Pacific/Fiji</option>
+                                </select>
+                            </div>
+                            <div class="input_container" style="display: none">
+                                <label for="start_date">Start Date and Time</label>
+                                <input id="start_date" class="datetimepicker" type="text" style="width: 140px;">
+                                <label for="end_date" style="left: 400px; position: absolute;top: 0;">End Date and Time</label>
+                                <input id="end_date" class="datetimepicker" type="text" style="width: 140px;left: 560px;">
+                            </div>
+                            <div class="clear"></div>
+                            <br/>
+                            <div id="save_area" class="grid_3 omega schedule_meeting_button_container">
+                                <button class="button1 schedule_meeting">Schedule</button>
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                        <br/>
+                        <div class="message_container"> </div>
+                        <div class="schedule-success">Your Meeting has been scheduled successfully </div>
+                        <div class="offline-schedule">This Meeting will be scheduled when you are back online</div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="password-config" style="display: none;" class="config">
+        <div class="config_body">
+            <div id="setup_dev_options" class="modal options-modal" style="display: none;background: white" >
+                <h2>LinkedIn</h2>
+                <form id="linkedin_sync_form_dev" name="linkedin_sync_form_dev">
+                    <div class="input_container push up">
+                      <label for="sync_linkedin_app_server_host">Application Server</label>
+                      <input id="sync_linkedin_app_server_host" type="text" placeholder="" />
+                  </div>
+                  <div class="push up input_container">
+                        <button class="button2 close cancel sync_settings_btn_dev_cancel">Cancel</button>
+                        <input type="submit" id="sync_settings_btn_dev" class="button1" value="Update Settings" />
+                    </div>
+                </form>
+                <div id="sync_error_container_developer_options"></div>
+            </div>
+            <div class="logo"></div>
+            <p class="push up">Please log into your LinkedIn account and we'll setup your app for you.</p>
+            <form class="linkedin_settings" name="linkedin_settings">
+                <div class="input_container push up">
+                    <label for="email">Username or Email:</label>
+                    <input class="email" type="text" tabindex="1" placeholder="Username or Email Address">
+                </div>
+                <div class="input_container">
+                    <label for="password">Password:</label>
+                    <input class="password" type="password" tabindex="2" placeholder="Password">
+                </div>
+                <div class="save_container">
+                    <button class="config_save button1" tabindex="3">Login</button>
+                </div>
+            </form>
+        </div>
+        <div class="error_container"></div>
+    </div>
+
+    <div id="sso-config" style="display: none;" class="config">
+        <div class="logo"></div>
+        <h2>Alternate Configuration</h2>
+        <div class="config_body">
+            <p class="push up">Your <span class="important">Email</span>, <span class="important">Meeting ID</span> and <span class="important">Participant Passcode</span> is all we need to set you up.</p>
+            <form class="linkedin_settings" name="linkedin_settings">
+                <div class="input_container push up">
+                    <label for="email">Email:</label>
+                    <input class="email" type="text" tabindex="1" placeholder="you@your-org.com">
+                    <div class="required">*</div>
+                </div>
+                <div class="input_container">
+                    <label for="meeting_id">Meeting ID:</label>
+                    <input class="meeting_id" type="text" tabindex="2" maxlength="10" placeholder="##########">
+                    <div class="required">*</div>
+                </div>
+                <div class="input_container">
+                    <label for="participant_pass">Participant Passcode:</label>
+                    <input class="participant_pass" type="text" tabindex="3" maxlength="4" placeholder="####">
+                </div>
+                <div class="save_container pad down">
+                    <button class="config_save button1" tabindex="4">Finish</button>
+                </div>
+            </form>
+        </div>
+        <div class="error_container"></div>
+    </div>
+    <div id="congratulations" style="display: none">
+            <div class="logo"></div>
+            <h2>Congratulations</h2>
+        <div class="config_body">
+            <div id="congrats_text">
+                <p>Your LinkedIn app is now configured and ready to use.</p>
+                <p><a id="calendar_go" class="button1">Schedule a Meeting</a>
+                </p>
+                <div id="advanced_settings"><a id="load_extension_settings">Advanced Settings</a>
+                </div>
+            </div>
+            <div id="congrats_image"></div>
+        </div>
+    </div>
+    <div id="offline-state" style="display: none;">
+        <div class="offline-description">
+        <h1 class="title">Lost network connectivity</h1>
+        <br/><br/>
+        <div class="offline-features">While you are offline, you can continue using the App and we will sync your data with LinkedIn Cloud when you are back online</div>
+    </div>
+</div>
+</div>
+  </body>
+</html>

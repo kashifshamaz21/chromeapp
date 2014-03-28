@@ -1,0 +1,28 @@
+{
+    "name": "LinkedIn",
+    "version": "1.0",
+    "manifest_version": 2,
+    "description": "LinkedIn",
+    "app": {
+        "background": {
+            "scripts": ["/js/background.js"]
+        }
+    },
+    "permissions": [
+        "fileSystem",
+        "fullscreen",
+        "storage",
+        "videoCapture",
+        "audioCapture",
+        "unlimitedStorage",
+        "notifications",
+        "https://www.google.com/calendar/*",
+        "http://10.16.22.32:3000/*"
+    ],
+    "icons" : {
+        "16": "/images/bjn-icon-16.png",
+        "19": "/images/bjn-icon-19.png",
+        "48": "/images/bjn-icon-48.png",
+        "128": "/images/bjn-icon-128.png"
+    }
+}

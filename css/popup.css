@@ -1,0 +1,235 @@
+
+body {
+    overflow-x: hidden;
+}
+
+h2 {
+    margin: 20px 0 20px 10px;
+}
+
+.clear {
+    clear: both;
+}
+
+.left-sidebar > div {
+    display: block;
+    margin: 0 0 2px 0;
+    width: 260px;
+    height: 25px;
+    padding: 5px 0 5px 10px;
+    background: #ECECEC url('images/button-sprite.png') no-repeat 0 -86px;
+    border: 1px solid #CCCCCC;
+}
+
+.left-sidebar > div:hover {
+    background-position: 0 -129px;
+    cursor: pointer;
+}
+
+.left-sidebar > div:focus {
+    outline-width: 2px;
+}
+
+.left-sidebar > div:active {
+    background-image: none;
+    background-color: #ECF6FB;
+}
+
+.left-sidebar a {
+    display: block;
+    color: #8C8C8C;
+    font-family: 'ProximaNovaBold';
+    font-size: 14px;
+    line-height: 25px;
+    vertical-align: middle;
+    text-decoration: none;
+    text-align: left;
+    text-indent: 35px;
+    width: 250px;
+    height: 25px;
+    outline: none;
+    text-transform: uppercase;
+}
+
+.left-sidebar a:hover, .left-sidebar a:active {
+    outline: none;
+}
+
+.config_body {
+    position: relative;
+    margin-left: 10px;
+    height: 220px;
+    width: 420px;
+}
+
+/*----- Main Config Body -----*/
+.config_body > p {
+    width: 400px;
+}
+
+.config_body input {
+    width: 200px;
+}
+
+.config_body label {
+    width: 145px;
+}
+
+.config_body .required {
+    left: 145px;
+}
+
+.config_body .config_save {
+    width: 204px;
+}
+
+#password-config {
+    height: 269px;
+}
+
+.logo {
+    position: absolute;
+    top: 15px;
+    right: 30px;
+    width: 130px;
+    height: 33px;
+    background: #FFFFFF url('images/main-sprite.png') no-repeat 0 0;
+    margin: 0;
+    padding: 0;
+}
+
+span.important {
+    font-family: 'ProximaNovaBold';
+    color: #666666;
+}
+
+.save_container {
+    position: relative;
+    height: 40px;
+}
+
+.save_container .config_save {
+    position: absolute;
+    top: 0;
+    left: 160px;
+}
+
+.config_save {
+    width: 204px;
+}
+
+.error_container {
+    display: none;
+    line-height: 28px;
+    text-align: center;
+    background-color: #990000;
+    color: #FFFFFF;
+    font-weight: bold;
+}
+
+#password-config .error_container {
+    margin-top: 52px;
+}
+
+#sso-config .error_container {
+    margin-top: 8px;
+}
+
+/*----- Alternate Config Body -----*/
+#alt_config {
+    height: 20px;
+    text-align: center;
+    margin-top: 10px;
+}
+
+#congrats_image {
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    background: #FFFFFF url('images/main-sprite.png') no-repeat 0 -150px;
+    width: 102px;
+    height: 110px;
+    margin-top: 5px;
+}
+
+#congrats_text {
+    padding-top: 15px;
+    width: 260px;
+}
+
+#congrats_text p {
+    width: 260px;
+    padding-top: 15px;
+}
+
+#congrats_text .button1 {
+    width: 160px;
+    line-height: 37px;
+
+}
+
+#advanced_settings {
+    width: 160px;
+    text-align: center;
+}
+
+#instant_meeting {
+    background-image: url('images/icon-sprite.png');
+    background-repeat: no-repeat;
+    background-position: 0 5px;
+}
+
+.schedule_meeting{
+    background-position: 0 0;
+    color: #fff;
+    border-color: #1183cf;
+    background-position: 0 0;
+}
+
+#personal_meeting {
+    background-image: url('images/icon-sprite.png');
+    background-repeat: no-repeat;
+    background-position: 0 -86px;
+}
+
+#schedule_meeting {
+    background-image: url('images/icon-sprite.png');
+    background-repeat: no-repeat;
+    background-position: 0 -86px;
+}
+
+#my_meetings {
+    background-image: url('images/icon-sprite.png');
+    background-repeat: no-repeat;
+    background-position: 0 -26px;
+}
+
+#extension_settings {
+    background-image: url('images/icon-sprite.png');
+    background-repeat: no-repeat;
+    background-position: 0 -57px;
+}
+
+button {
+    min-width: 144px;
+}
+
+.simplemodal-overlay {
+    background: black;
+}
+
+.sync_settings_btn_dev_cancel {
+    margin-left:18px;
+}
+
+#sync_settings_btn_dev {
+    margin-left:10px;
+}
+
+.main-content > .calendar {
+    width: 1000px;
+    border: none;
+    background: none;
+    margin: 0;
+    padding: 0;
+}
