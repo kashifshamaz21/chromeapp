@@ -17,7 +17,9 @@
         "unlimitedStorage",
         "notifications",
         "https://www.google.com/calendar/*",
-        "http://10.16.22.32:3000/*"
+        "http://10.16.22.32:3000/*",
+        "identity",
+        "*://*.linkedin.com/"
     ],
     "icons" : {
         "16": "/img/linkedin_64x64.jpeg",
