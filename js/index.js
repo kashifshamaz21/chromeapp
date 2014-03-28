@@ -1,4 +1,4 @@
-var gh = (function() {
+var linkedinApis = (function() {
   'use strict';
   
   var signin_button;
@@ -387,4 +387,4 @@ var gh = (function() {
 })();
 
 
-window.onload = gh.onload;
+window.onload = linkedinApis.onload;
