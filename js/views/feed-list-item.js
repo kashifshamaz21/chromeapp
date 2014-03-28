@@ -23,6 +23,7 @@ define(["jquery",
     	render: function  (argument) {
     		this.$el.append(JobFeed);
             this.$el.find("#company").text(this.model.get("updateContent").company.name);
+            this.$el.find("#job-designation").text(this.model.get("updateContent").job.position.title);
             this.$el.find("#job-posted-time").text(moment(this.model.get("timestamp")).fromNow());
             
             return this.el;
