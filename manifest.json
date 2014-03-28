@@ -20,9 +20,9 @@
         "http://10.16.22.32:3000/*"
     ],
     "icons" : {
-        "16": "/images/bjn-icon-16.png",
-        "19": "/images/bjn-icon-19.png",
-        "48": "/images/bjn-icon-48.png",
-        "128": "/images/bjn-icon-128.png"
+        "16": "/images/linkedin_64x64.jpeg",
+        "19": "/images/linkedin_64x64.jpeg",
+        "48": "/images/linkedin_64x64.jpeg",
+        "128": "/images/linkedin_64x64.jpeg"
     }
 }
