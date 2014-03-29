@@ -157,12 +157,14 @@ require(["backbone",
           network_status.show();
         }
         _me.getFromChrome("share" , function(pendingShares){
-          _me.postShare(pendingShares, function(err , response){
+          _me.postShare(pendingShares, function(err , updateKey){
             if (!err) {
                 console.log("Pending shares are published!");
+                chrome.storage.local.remove("share");
+                _me.shareNewPostView.postSuccess(null, updateKey);
             }
-          })
-        })
+          });
+        });
     },
 
     renderUserFeed: function() {
