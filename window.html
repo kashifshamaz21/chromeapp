@@ -79,7 +79,12 @@
 	                </li>
                 </ul>
     			<ul class="nav pull-right">
-                  <li><span id="network-status">OFFLINE</span></li>  
+    			<li>
+    				<button id="setup-new-room"><i class="fa fa-video-camera"></i></button>
+    			</li>
+                  <li id="network-status">
+                      <span>OFFLINE</span>
+                  </li>
     			  <li class="dropdown">
     				<a class="btn dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"><i class="fa fa-envelope-o"></i></a>
     				<ul class="dropdown-menu">
@@ -112,8 +117,7 @@
                         <li class="divider"></li>
                         <li><a tabindex="-1" href="#">Logout</a></li>
                     </ul>
-                  </li>                
-                  <li class="dropdown"></li>
+                  </li>
             </ul>
 		  </div><!--/.nav-collapse -->
 		</div>
@@ -191,6 +195,7 @@
 		</div>
 	  </div>
 	</div>    
-
+	<table style="width: 100%;" id="rooms-list"></table>
+	<div id="videos-container"></div>
   </body>
 </html>

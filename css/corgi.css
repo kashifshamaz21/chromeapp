@@ -53,6 +53,16 @@ body {
 	color: red;
 	display: none;
 }
+
+/* Conf Stytles*/
+#setup-new-room{
+	background: transparent;
+	border: 0;
+	color: white;
+	margin-top: 10px;
+	display: block;
+}
+
 @media (max-width: 979px) {
 .nav-collapse .nav > li > a:hover, .nav-collapse .nav > li > a:focus, .nav-collapse .dropdown-menu a:hover, .nav-collapse .dropdown-menu a:focus {
 	background-color: #000;
@@ -296,10 +306,10 @@ body {
 	box-shadow: none;
 	border: none;
 }
-.navbar .nav > li > a > i {
+.navbar .nav > li > a > i , .navbar .nav > li > button > i{
 	width: 23px;
 	height: 14px;
-	color: rgb(138, 138, 138);
+	color: #fff;
 	font-size: 18px;
 	line-height: 14px;
 	background: rgba(0, 0, 0, 0);
@@ -418,6 +428,8 @@ width: 50px;
 word-spacing: 0px;
 writing-mode: lr-tb;
 zoom: 1;
+margin: -6px 0 0 -4px;
+padding: 5px;
 }
 .search-container li input {
 	width: 320px;

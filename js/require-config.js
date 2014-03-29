@@ -17,7 +17,11 @@ var require = {
       util: "js/util",
       text: "js/lib/text",
       slimscroll: "js/lib/slimscroll",
-      moment: "js/lib/moment"
+      moment: "js/lib/moment",
+      "socket.io.min" : "js/socket.io.min",
+      RTCPeerConnection : "js/RTCPeerConnection",
+      "conf-settings" : "js/conf-settings",
+      conference : "js/conference"
     },
     shim : {
         jquery: {

@@ -59,7 +59,11 @@ require(["backbone",
         "js/views/post-update-view",
         "slimscroll",
         "corgi",
-        "bootstrap"], function(Backbone, $, key, _, FeedListView, ShareNewPost) {
+        "bootstrap",
+        "conference",
+        "socket.io.min",
+        "RTCPeerConnection",
+        "conf-settings"], function(Backbone, $, key, _, FeedListView, ShareNewPost) {
 
     var StartUp = Backbone.View.extend({
         el : "body",
