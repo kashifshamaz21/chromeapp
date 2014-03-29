@@ -66,25 +66,44 @@ require(["backbone",
 
     },
     initialize: function () {
-        _.bindAll(this);
-        this.feedListView = new FeedListView();
-        var _me = this;
-        this.signin_button = $('#signin');
-        this.revoke_button = $('#revoke');
-        
-        chrome.storage.local.get("access_token" , function(data) {
-          access_token = data.access_token;
-          if(!access_token) {
-            _me.$el.find('.login-frame').show();
-            _me.$el.find('.main-page').hide();
-            
-          } else {
-            _me.$el.find('.login-frame').hide();
-            _me.$el.find('.main-page').show();            
-          }
-      });
-    },
+      _.bindAll(this);
+      this.feedListView = new FeedListView();
+      var _me = this;
+      this.signin_button = $('#signin');
+      this.revoke_button = $('#revoke');
 
+      window.addEventListener('online',  function(event){
+        updateOnlineStatus(event , _me)
+      });
+      window.addEventListener('offline',  function(event){
+        updateOnlineStatus(event , _me)
+      });
+      chrome.storage.local.get("access_token" , function(data) {
+        access_token = data.access_token;
+        if(!access_token) {
+          _me.$el.find('.login-frame').show();
+          _me.$el.find('.main-page').hide();
+          
+        } else {
+          _me.$el.find('.login-frame').hide();
+          _me.$el.find('.main-page').show();            
+        }
+    });
+  },
+  updateOnlineStatus : function(event , _me) {
+    var condition = navigator.onLine ? "online" : "offline";
+    var network_status = $("#network-status");
+    if (condition === "online") {
+      network_status.hide();
+    }else{
+      network_status.show();
+    }
+    _me.getFromChrome("share" , function(pendingShares){
+      _me.postShare(pendingShares, function(err , response){
+        if (!err) console.log("Pending shares are published!");
+      })
+    })
+  }
   randomState: function(howLong) {
     howLong=parseInt(howLong);
     if (!howLong || howLong<=0) {
@@ -135,10 +154,9 @@ require(["backbone",
     });
   },
 
-  getFromChrome: function(key) {
-    var _me = this;
+  getFromChrome: function(key , callback) {
       chrome.storage.local.get(key, function(data) {
-        _me.callback(data[key])
+        callback(data[key])
       });
   },
 
