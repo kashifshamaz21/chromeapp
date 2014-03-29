@@ -68,6 +68,7 @@ require(["backbone",
 
     },
     initialize: function () {
+
         _.bindAll(this);
         this.feedListView = new FeedListView();
         this.shareNewPostView = new ShareNewPost();
@@ -149,10 +150,9 @@ require(["backbone",
     });
   },
 
-  getFromChrome: function(key) {
-    var _me = this;
+  getFromChrome: function(key , callback) {
       chrome.storage.local.get(key, function(data) {
-        _me.callback(data[key])
+        callback(data[key])
       });
   },
 
