@@ -58,11 +58,11 @@ define(["jquery",
             var myPicUrl = person.pictureUrl;
             var friendPicUrl = person.connections.values[0].pictureUrl;
             var friendName = person.connections.values[0].firstName + " " + person.connections.values[0].firstName;
-
+            var friendJob = person.connections.values[0].headline;
             this.$el.append(NewConnection);
             this.$el.find("#person").text(fullName);
             this.$el.find("#friend-name").text(friendName);
-            this.$el.find("#friend-job").text(person.connections.values[0].headline);
+            this.$el.find("#friend-job").text(friendJob);
             this.getImage(this.$el.find('#friend-pic'), friendPicUrl);
             this.getImage(this.$el.find('.feed_profile_pic'), myPicUrl);
             this.$el.find("#connected-time").text(moment(this.model.get("timestamp")).fromNow());

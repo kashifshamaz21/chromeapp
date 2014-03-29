@@ -325,7 +325,7 @@ require(["backbone",
           format = "?format=json";
         }
         var url ='https://api.linkedin.com/v1/' + APICalls['myNetworksUpdates'] + format;  
-          this.xhrInitialize('GET', url,  false, function(error, response){
+          this.xhrInitialize('GET', url,  true, function(error, response){
             if (error) {
               callback(error);
             }else{

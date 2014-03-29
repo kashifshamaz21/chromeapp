@@ -5,7 +5,7 @@
 	font-size: 14px;
 }
 
-.anchor {
+.bottom_right span.anchor {
 	color: #0088cc;
 	cursor: pointer;
 }
@@ -25,4 +25,8 @@
 
 #friend-pic , #friend-description {
 	display: inline-block;
+}
+#friend-description {
+	margin-left: 10px;
+	width: 350px;
 }
