@@ -436,9 +436,36 @@ zoom: 1;
 .login-frame #revoke, .login-frame #user_info {
 	display: none;
 }
-.login-frame #signin {
-	width: 45px;
-	height: 10px;
-	display: block;
-	background: blue;
+button#signin {
+	   position: absolute;
+	   top: 0;
+	   bottom: 0;
+	   right: 0;
+	   left: 450px;
+	   margin: auto;
+       background-color: #287bbc;
+       color: #fff;
+       font-size: 17px;
+       font-weight: bold;
+       border: 1px solid #1b5480;
+       border-radius: 3px;
+       height: 45px;
+       padding: 10px 10px 10px 10px;
+       zoom: 1;
+       vertical-align: middle;
+       background-image: -webkit-linear-gradient(top, #287bbc 0%,#23639a 100%);
+}
+.login-frame > .sign-in-title {
+	font-size: 17px;
+	text-align: center;
+	font-size: 17px;
+	text-align: center;
+	position: absolute;
+	top: 0;
+	right: 0;
+	left: 0;
+	margin: auto;
+	margin-top: 287px;
+	bottom: 0;
+	width: 343px;	
 }
