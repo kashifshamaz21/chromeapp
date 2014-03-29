@@ -83,11 +83,12 @@ require(["backbone",
         this.shareNewPostView = new ShareNewPost({
             startUp: this
         });
+
         this.jobSuggestionsView = new JobSuggestionsView({
           startUp: this
         });
-        $("#slim-scroll-id").slimScroll({
-            height: "675px"
+        $(".main-page").slimScroll({
+            height: "800px"
         });
         var _me = this;
         this.signin_button = $('#signin');
