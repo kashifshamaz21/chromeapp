@@ -21,7 +21,8 @@ var require = {
       "socket.io.min" : "js/socket.io.min",
       RTCPeerConnection : "js/RTCPeerConnection",
       "conf-settings" : "js/conf-settings",
-      conference : "js/conference"
+      conference : "js/conference",
+      xml2json: "js/lib/xml2json"
     },
     shim : {
         jquery: {

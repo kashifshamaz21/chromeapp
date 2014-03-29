@@ -21,6 +21,7 @@ define(["jquery",
             this.startUp = options.startUp;
     		this.collection = new FeedCollection();
             this.collection.bind("add", this.addOneFeed, this);
+            Backbone.on("sharePosted", this.newShareFeed);
     	},
 
         addOneFeed: function (model) {
@@ -30,7 +31,16 @@ define(["jquery",
                 id: selectorId,
                 model: model
             });
-            this.$("#feed-list").append(feedItem.render());
+            if(feedType === "MY_NEW_POST") {
+                this.$("#feed-list").prepend(feedItem.render());
+            } else {
+                this.$("#feed-list").append(feedItem.render());
+            }
+        },
+
+        newShareFeed: function (model) {
+            // body...
+            this.collection.add(model);
         },
 
     	render: function  (argument) {
