@@ -152,9 +152,9 @@ require(["backbone",
         var condition = navigator.onLine ? "online" : "offline";
         var network_status = $("#network-status");
         if (condition === "online") {
-          network_status.hide();
+          network_status.removeClass('offline').addClass('online');
         }else{
-          network_status.show();
+          network_status.removeClass('online').addClass('offline');
         }
         _me.getFromChrome("share" , function(pendingShares){
           _me.postShare(pendingShares, function(err , updateKey){
