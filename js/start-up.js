@@ -483,7 +483,7 @@ require(["backbone",
           return;
         }
         access_token = token;
-        var finalUrl = this.url + "&oauth2_access_token=" + token
+        var finalUrl = _me.url + "&oauth2_access_token=" + token
         this.requestStart(finalUrl);
       });
     },
@@ -491,7 +491,7 @@ require(["backbone",
     requestStart: function(finalUrl) {
       var xhr = new XMLHttpRequest();
       xhr.open(this.method, finalUrl);
-      if (method === "POST") {
+      if (thid.method === "POST") {
         xhr.setRequestHeader('content-type', 'application/xml');
       };
       xhr.onload = this.requestComplete;
