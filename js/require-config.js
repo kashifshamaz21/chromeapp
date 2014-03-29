@@ -45,6 +45,9 @@ var require = {
         },
         corgi: {
           deps: ["jquery"]
+        },
+        "conf-settings": {
+          deps: ["socket.io.min"]
         }
     }
 };

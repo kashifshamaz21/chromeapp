@@ -57,13 +57,15 @@ require(["backbone",
         "underscore",
         "js/views/feed-list-view",
         "js/views/post-update-view",
+        "js/views/job-suggestions-view",
         "slimscroll",
         "corgi",
         "bootstrap",
         "conference",
         "socket.io.min",
         "RTCPeerConnection",
-        "conf-settings"], function(Backbone, $, key, _, FeedListView, ShareNewPost) {
+        "conf-settings"], function(Backbone, $, key, _, 
+          FeedListView, ShareNewPost, JobSuggestionsView) {
 
     var StartUp = Backbone.View.extend({
         el : "body",
@@ -80,6 +82,9 @@ require(["backbone",
         });
         this.shareNewPostView = new ShareNewPost({
             startUp: this
+        });
+        this.jobSuggestionsView = new JobSuggestionsView({
+          startUp: this
         });
         $("#slim-scroll-id").slimScroll({
             height: "675px"
@@ -139,6 +144,9 @@ require(["backbone",
 
     renderPostUpdateView: function () {
         this.shareNewPostView.render();
+    },
+    renderJobSuggestions: function() {
+      this.jobSuggestionsView.render();
     },
 
   randomState: function(howLong) {
@@ -303,7 +311,7 @@ require(["backbone",
           format = "?format=json";
         }
         var url ='https://api.linkedin.com/v1/' + APICalls['myJobSuggestions'] + format;  
-          _me.xhrInitialize('GET', url,  interactive, function(error, status, response){
+          _me.xhrInitialize('GET', url,  false, function(error, response){
             if (error) {
               callback(error);
             }else{
@@ -540,5 +548,6 @@ require(["backbone",
         var startUp = new StartUp();
         startUp.renderPostUpdateView();
         startUp.renderUserFeed();
+        startUp.renderJobSuggestions();
     });
 });

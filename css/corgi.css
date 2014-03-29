@@ -481,3 +481,42 @@ button#signin {
 	bottom: 0;
 	width: 343px;	
 }
+
+#job-suggestions-wrapper h1 {
+	color: rgb(0, 119, 181);
+	cursor: pointer;
+	display: inline;
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 13px;
+	font-style: normal;
+	font-weight: bold;
+	height: auto;
+	line-height: 14px;
+	text-align: left;
+	text-decoration: none solid rgb(0, 119, 181);
+	vertical-align: baseline;
+	width: auto;
+	zoom: 1;
+}
+#job-suggestions-wrapper h2.job-description, h3.job-location {
+	color: rgb(102, 102, 102);
+	display: block;
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 13px;
+	font-style: normal;
+	font-weight: normal;
+	height: 14px;
+	line-height: 14px;
+	margin-bottom: 5px;
+	text-align: left;
+	text-overflow: ellipsis;
+	vertical-align: baseline;
+	zoom: 1;
+	width: 240px;
+}
+#job-suggestions-wrapper h3.job-location {
+	margin-top: 40px;
+}
+#job-suggestions-wrapper .job-suggestion-item {
+	border-bottom: 1px solid #CCCCCC;
+}
