@@ -320,7 +320,7 @@ body {
 	background: rgba(0, 0, 0, 0);
 	margin: 0 0 0 0;
 }
-#in-logo {
+.in-logo {
 	background: url("../img/logo_in_nav_retina_88x72.png") no-repeat;
 -webkit-background-clip: border-box;
 -webkit-background-origin: padding-box;
