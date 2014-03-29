@@ -54,8 +54,10 @@ require(["backbone",
         "keymaster",
         "underscore",
         "js/views/feed-list-view",
+        "js/views/post-update-view",
+        "slimscroll",
         "corgi",
-        "bootstrap"], function(Backbone, $, key, _, FeedListView) {
+        "bootstrap"], function(Backbone, $, key, _, FeedListView, ShareNewPost) {
 
     var StartUp = Backbone.View.extend({
         el : "body",
@@ -68,6 +70,10 @@ require(["backbone",
     initialize: function () {
         _.bindAll(this);
         this.feedListView = new FeedListView();
+        this.shareNewPostView = new ShareNewPost();
+        $(".main-content").slimScroll({
+            height: "675px"
+        });
         var _me = this;
         this.signin_button = $('#signin');
         this.revoke_button = $('#revoke');
@@ -83,6 +89,14 @@ require(["backbone",
             _me.$el.find('.main-page').show();            
           }
       });
+    },
+
+    renderUserFeed: function() {
+            this.feedListView.render();
+    },
+
+    renderPostUpdateView: function () {
+        this.shareNewPostView.render();
     },
 
   randomState: function(howLong) {
@@ -474,6 +488,7 @@ require(["backbone",
 
     $(document).ready(function() {
         var startUp = new StartUp();
+        startUp.renderPostUpdateView();
         startUp.renderUserFeed();
     });
 });

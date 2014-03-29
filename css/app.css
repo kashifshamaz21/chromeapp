@@ -1,3 +1,29 @@
 .search-container li button.search {
 	margin-left: 13px;
 }
+
+.small-width {
+	width: 620px;
+	margin-left: 83px;
+}
+
+#new-post-textarea {
+	width: 83%;
+	padding: 4px;	
+	height: 30px;
+	margin-bottom: 10px;
+}
+
+button#new-post-save {
+	float: right;
+	background-color: #287bbc;
+	color: #fff;
+	font-size: 13px;
+	font-weight: bold;
+	border: 1px solid #1b5480;
+	border-radius: 3px;
+	height: 30px;
+	zoom: 1;
+	vertical-align: middle;
+	background-image: -webkit-linear-gradient(top, #287bbc 0%,#23639a 100%);
+}

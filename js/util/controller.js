@@ -61,6 +61,19 @@ define(["jquery",
                             url: "http://www.linkedin.com/jobs?viewJob=&amp;jobId=8162505"
                         }
                     }
+                },
+                {
+                    timestamp : 1262645073369,
+                    updateType: "PICU",
+                    updateContent: {
+                        person: {
+                            id: "lJW0vcN4d6",
+                            firstName: "John",
+                            lastName: "Irving",
+                            headline: "Author",
+                            pictureUrl: "http://m.c.lnkd.licdn.com/mpr/mpr/shrink_200_200/p/7/005/050/20e/3a01baa.jpg"
+                        }
+                    }
                 }]
             };
             success(data);   

@@ -20,9 +20,6 @@ define(["jquery",
     		_.bindAll(this);
     		this.collection = new FeedCollection();
             this.collection.bind("add", this.addOneFeed, this);
-            $("#user-feed-wrapper").slimScroll({
-                height: "700px"
-            });
     	},
 
         addOneFeed: function (model) {
