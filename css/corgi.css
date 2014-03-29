@@ -288,6 +288,11 @@ body {
 .elusive_icons li {
 	list-style-type:none;
 }
+
+.video-call {
+	display: none;
+}
+
 .nav > li {
 	width: 43px;
 	height: 42px;

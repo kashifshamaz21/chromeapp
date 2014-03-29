@@ -26,9 +26,7 @@ define(["jquery",
 
         addOneFeed: function (model) {
             var feedType = model.get("updateType");
-            var selectorId = "feed-" + model.id;
             var feedItem = new FeedListItem({
-                id: selectorId,
                 model: model
             });
             if(feedType === "MY_NEW_POST") {
