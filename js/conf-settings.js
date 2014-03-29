@@ -46,7 +46,8 @@ var config = {
 
         var tr = document.createElement('tr');
         tr.innerHTML = '<td><strong>' + room.roomName + '</strong> shared a conferencing room with you!</td>' +
-                       '<td><button class="join">Join</button></td>';
+                       '<td><button class="join btn btn-primary">Join</button></td>'+
+                       '<td><button class="btn btn-danger leaveConference">Leave</button></td>';
         roomsList.insertBefore(tr, roomsList.firstChild);
 
         var joinRoomButton = tr.querySelector('.join');
@@ -54,7 +55,6 @@ var config = {
         joinRoomButton.setAttribute('data-roomToken', room.broadcaster);
         joinRoomButton.onclick = function() {
             this.disabled = true;
-
             var broadcaster = this.getAttribute('data-broadcaster');
             var roomToken = this.getAttribute('data-roomToken');
             captureUserMedia(function() {
@@ -68,7 +68,7 @@ var config = {
 };
 
 var conferenceUI = conference(config);
-var videosContainer = document.getElementById('videos-container') || document.body;
+var videosContainer = document.getElementById('videos-container_holder') || document.body;
 var roomsList = document.getElementById('rooms-list');
 
 document.getElementById('setup-new-room').onclick = function () {

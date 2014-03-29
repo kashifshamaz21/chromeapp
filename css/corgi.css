@@ -526,3 +526,8 @@ button#signin {
 	border-bottom: 1px solid #CCCCCC;
 }
 .share_wrapper{display: none;}
+.video-call h3{text-align: center;}
+#videos-container {width: 100%}
+#videos-container_holder{margin: 0 auto;}
+#videos-container video{ width: 500px;}
+#rooms-list{width: 40%;margin: 0 auto;}

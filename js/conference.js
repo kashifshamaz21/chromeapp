@@ -190,14 +190,13 @@ var conference = function(config) {
         if(config.attachStream) config.attachStream.stop();
     }
 
-/*    window.onbeforeunload = function() {
-        leave();
-    };*/
-
     chrome.app.window.onClosed.addListener(function(){
         leave();
     });
-    
+
+    $(document).on( "click", ".leaveConference", function(e){
+        leave();
+    })
     window.onkeyup = function(e) {
         if (e.keyCode == 116) leave();
     };
