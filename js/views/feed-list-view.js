@@ -34,14 +34,14 @@ define(["jquery",
         },
 
     	render: function  (argument) {
-    		this.getJobUpdates();
+    		this.getUserFeed();
     	},
 
-    	getJobUpdates: function() {
-    		this.startUp.getFeeds(this.getJobUpdatesSuccess);
+    	getUserFeed: function() {
+    		this.startUp.getFeeds(this.getUserFeedSuccess);
     	},
 
-    	getJobUpdatesSuccess: function(error, jobUpdates) {
+    	getUserFeedSuccess: function(error, jobUpdates) {
             if(!error) {
                 var newModels = [];
                 _.each(jobUpdates.values, _.bind(function(update, index, updateList){ 
@@ -50,11 +50,11 @@ define(["jquery",
                 }, this));
                 this.collection.set(newModels);  
             } else {
-                this.getJobUpdatesFailed();
+                this.getUserFeedFailed();
             }
     	},
 
-    	getJobUpdatesFailed: function () {
+    	getUserFeedFailed: function () {
     		console.log("get job updates failed");
     	}
         

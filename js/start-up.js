@@ -28,6 +28,8 @@
   APICalls['peopleSearchWithKeywords'] = 'people-search:(people:(id,first-name,last-name,picture-url,headline),num-results,facets)?keywords=Hacker+in+Residence';
   APICalls['peopleSearchWithFacets'] = 'people-search:(people,facets)?facet=location,us:84';
 
+  APICalls['share'] = 'people/~/shares';
+
   // GROUPS APIS
   // Be sure to change the GroupId accordingly
   APICalls['myGroups'] = 'people/~/group-memberships?membership-state=member';
@@ -260,11 +262,11 @@ require(["backbone",
     postShare : function(postData , callback){
         var _me = this;
       var xmlData = '<share>' +
-                      '<comment>'+postData.comment +'</comment>'
+                      '<comment>'+postData.comment +'</comment>' + 
                       '<content>'+
                         '<title>'+postData.title+'</title>'+
                         '<description>'+postData.description +'</description>'+
-                        '<submitted-url>'+postData.commentUrl+'/submitted-url>'+
+                        '<submitted-url>'+postData.commentUrl+'</submitted-url>'+
                         '<submitted-image-url>'+postData.imageUrl+'</submitted-image-url>'+ 
                       '</content>'+
                       '<visibility>'+ 
@@ -273,7 +275,7 @@ require(["backbone",
                     '</share>';
       if (navigator.onLine) {
         var url ='https://api.linkedin.com/v1/' + APICalls['share'];  
-          _me.xhrInitialize('POST', url,  interactive, function(error, status, response){
+          _me.xhrInitialize('POST', url,  false, function(error, response){
             if (error) {
               callback(error);
             }else{
@@ -490,7 +492,12 @@ require(["backbone",
         }
         access_token = token;
 
-        var finalUrl = _me.url + "&oauth2_access_token=" + token
+        var finalUrl;
+        if (_me.method === "POST") {
+            finalUrl = _me.url + "?oauth2_access_token=" + token;
+        }else{
+            finalUrl = _me.url + "&oauth2_access_token=" + token;
+        }
         _me.requestStart(finalUrl);
 
       });

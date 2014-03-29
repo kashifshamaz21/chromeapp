@@ -13,7 +13,7 @@ define(["jquery",
         el: "#share-post",
 
         events: {
-        
+            "click #new-post-save": "postShare"
         },
 
     	initialize: function(options) {
@@ -40,13 +40,13 @@ define(["jquery",
         },
 
         postShare: function () {
-            var comment = $("#new-post-textarea").text();
+            var comment = $("#new-post-textarea").val();
             if(comment !== '') {
                 this.startUp.postShare({
                     comment: comment,
-                    title: "",
+                    title: comment,
                     description: "",
-                    commentUrl: "",
+                    commentUrl: "https://developer.linkedin.com/documents/share-api",
                     imageUrl: ""
                 }, this.postSuccess);
             }
