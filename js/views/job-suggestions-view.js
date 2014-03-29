@@ -20,6 +20,7 @@ define(["jquery",
             this.startUp = options.startUp;
     		this.collection = new JobSuggestions();
             this.collection.bind("add", this.addOne, this);
+            Backbone.on("renderJobSuggestions", this.render);
     	},
 
         addOne: function (model) {

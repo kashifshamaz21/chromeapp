@@ -135,7 +135,9 @@ require(["backbone",
         }
         _me.getFromChrome("share" , function(pendingShares){
           _me.postShare(pendingShares, function(err , response){
-            if (!err) console.log("Pending shares are published!");
+            if (!err) {
+                console.log("Pending shares are published!");
+            }
           })
         })
     },
@@ -582,6 +584,6 @@ require(["backbone",
         var startUp = new StartUp();
         startUp.renderPostUpdateView();
         startUp.renderUserFeed();
-        startUp.renderJobSuggestions();
+        //startUp.renderJobSuggestions();
     });
 });

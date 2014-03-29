@@ -62,6 +62,8 @@ define(["jquery",
             } else {
                 this.getUserFeedFailed();
             }
+            
+            Backbone.trigger("renderJobSuggestions");
     	},
 
     	getUserFeedFailed: function () {
