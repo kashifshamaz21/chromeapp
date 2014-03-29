@@ -52,9 +52,33 @@ define(["jquery",
             }
         },
 
-        postSuccess: function  (error, data) {
+        postSuccess: function  (error, updateKey) {
             if(!error) {
-                $("#new-post-textarea").text("");   
+                /*var comment = $("#new-post-textarea").val();
+                $("#new-post-textarea").text("");
+                var newPost = new Feed({
+                    updateType: "MY_NEW_POST",
+                    comment: comment,
+                    title: comment,
+                    description: "Check out the LinkedIn Share API! LinkedIn Developers Documentation On Using the Share API Leverage the Share API to maximize engagement on user-generated content on LinkedIn...",
+                    commentUrl: "developer.linkedin.com",
+                    imageUrl: null
+                });
+                Backbone.trigger("sharePosted", newPost);*/
+                $("#new-post-textarea").text("");
+                this.startUp.getShareJson(updateKey, this.getShareJsonSuccess);
+            }
+        },
+
+        getShareJsonSuccess: function  (error, data) {
+            // body...
+            if(!error) {
+                var comment = $("#new-post-textarea").val();
+                data.updateType = "MY_NEW_POST";
+                data.updateContent.person.currentStatus = comment;
+                var newPost = new Feed(data);
+                $("#new-post-textarea").val("");
+                Backbone.trigger("sharePosted", newPost);
             }
         }
         

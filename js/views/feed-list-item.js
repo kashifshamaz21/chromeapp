@@ -7,8 +7,9 @@ define(["jquery",
         "text!templates/job-post.html",
         "text!templates/new-profile-pic.html",
         "text!templates/new-connection.html",
+        "text!templates/new-post.html",
         "moment"
-        ], function($, _, Backbone, Controller, Feed, FeedCollection, JobFeed, NewProfilePic, NewConnection){
+        ], function($, _, Backbone, Controller, Feed, FeedCollection, JobFeed, NewProfilePic, NewConnection, MyNewPost){
 
     var UserFeedListItem = Backbone.View.extend({
 
@@ -28,6 +29,7 @@ define(["jquery",
                 case "JOBP": this.renderJobPost(); break;
                 case "PICU":  this.NewProfilePic(); break;
                 case "CONN":  this.NewConnection(); break;
+                case "MY_NEW_POST":  this.MyNewPost(); break;
                 default:
                     console.log("feedType is ", feedType);
             }
@@ -66,6 +68,21 @@ define(["jquery",
             this.getImage(this.$el.find('#friend-pic'), friendPicUrl);
             this.getImage(this.$el.find('.feed_profile_pic'), myPicUrl);
             this.$el.find("#connected-time").text(moment(this.model.get("timestamp")).fromNow());
+        },
+
+        MyNewPost: function  (argument) {
+            // body...
+            var person = this.model.get("updateContent").person;
+            var fullName = person.firstName + " " + person.lastName;
+            var comment = person.currentStatus; 
+            var newPicUrl = "http://s.c.lnkd.licdn.com/scds/common/u/img/themes/katy/ghosts/profiles/ghost_profile_60x60_v1.png";
+            
+            this.$el.append(MyNewPost);
+            this.getImage(this.$el.find('.feed_profile_pic'), newPicUrl);
+            this.$el.find("#person").text(fullName);
+            this.$el.find("#my-post-comment").text(comment);
+            this.$el.find("#my-post-title").text(comment);
+            this.$el.find("#new-post-created-time").text(moment(this.model.get("timestamp")).fromNow());
         },
 
         getImage: function (parent, imageUrl) {

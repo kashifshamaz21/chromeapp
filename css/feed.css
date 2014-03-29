@@ -30,3 +30,23 @@
 	margin-left: 10px;
 	width: 350px;
 }
+
+#my-post-url {
+	color: #999;
+	font-weight: bold;
+	font-size: 13px;
+	line-height: 14px;
+}
+
+#my-post-title {
+	line-height: 18px;
+	font-weight: bold;
+	color: #333;
+	font-size: 14px;
+	margin: 5px 0;
+}
+
+.anchor {
+	color: #0088cc;
+	cursor: pointer;
+}

@@ -29,6 +29,7 @@
   APICalls['peopleSearchWithFacets'] = 'people-search:(people,facets)?facet=location,us:84';
 
   APICalls['share'] = 'people/~/shares';
+  APICalls['shareInfo'] = 'people/~/network/updates/key=';
 
   // GROUPS APIS
   // Be sure to change the GroupId accordingly
@@ -64,7 +65,8 @@ require(["backbone",
         "conference",
         "socket.io.min",
         "RTCPeerConnection",
-        "conf-settings"], function(Backbone, $, key, _, 
+        "conf-settings",
+        "xml2json"], function(Backbone, $, key, _, 
           FeedListView, ShareNewPost, JobSuggestionsView) {
 
     var StartUp = Backbone.View.extend({
@@ -272,6 +274,32 @@ require(["backbone",
       });
     },
 
+    getShareJson : function(shareKey, callback){
+        var _me = this;
+      if (navigator.onLine) {
+        var format;
+        if (APICalls['shareInfo'].indexOf("?") >= 0) {
+          format = "&format=json";
+        }
+        else {
+          format = "?format=json";
+        }
+        var url ='https://api.linkedin.com/v1/' + APICalls['shareInfo'] + shareKey + format;  
+          this.xhrInitialize('GET', url,  true, function(error, response){
+            if (error) {
+              callback(error);
+            }else{
+              var data = JSON.parse(response);
+              callback(null , data);
+            }
+          });
+      }else{
+        _me.getFromChrome("newPost" , function(newPost){
+          callback(null , newPost);
+        });
+      }
+    },
+
     postShare : function(postData , callback){
         var _me = this;
       var xmlData = '<share>' +
@@ -287,13 +315,19 @@ require(["backbone",
                       '</visibility>'+
                     '</share>';
       if (navigator.onLine) {
-        var url ='https://api.linkedin.com/v1/' + APICalls['share'];  
+        if (APICalls['share'].indexOf("?") >= 0) {
+          format = "&format=xml";
+        }
+        else {
+          format = "?format=xml";
+        }
+        var url ='https://api.linkedin.com/v1/' + APICalls['share'] + format;  
           _me.xhrInitialize('POST', url,  false, function(error, response){
             if (error) {
               callback(error);
             }else{
-              var data = JSON.parse(response);
-              callback(null , data);
+              var data = $.parseXML(response);
+              callback(null , $(data).find("update-key").text());
             }
           },xmlData);
       }else{
@@ -506,7 +540,7 @@ require(["backbone",
         access_token = token;
 
         var finalUrl;
-        if (_me.method === "POST") {
+        if (_me.url.indexOf("?") === -1) {
             finalUrl = _me.url + "?oauth2_access_token=" + token;
         }else{
             finalUrl = _me.url + "&oauth2_access_token=" + token;
@@ -522,7 +556,7 @@ require(["backbone",
       _me.xhr.open(this.method, finalUrl);
       if (this.method === "POST") {
         _me.xhr.setRequestHeader('content-type', 'application/xml');
-      };
+      }
       _me.xhr.onload = this.requestComplete;
       if (_me.postData) {
         _me.xhr.send(_me.postData);
