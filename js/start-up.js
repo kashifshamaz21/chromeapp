@@ -66,7 +66,8 @@ require(["backbone",
         "socket.io.min",
         "RTCPeerConnection",
         "conf-settings",
-        "xml2json"], function(Backbone, $, key, _, 
+        "xml2json",
+        "moment"], function(Backbone, $, key, _, 
           FeedListView, ShareNewPost, JobSuggestionsView) {
 
     var StartUp = Backbone.View.extend({
@@ -79,6 +80,8 @@ require(["backbone",
     },
     initialize: function () {
         _.bindAll(this);
+
+        this.startMockNotifications();
         this.feedListView = new FeedListView({
             startUp: this
         });
@@ -124,6 +127,25 @@ require(["backbone",
           _me.$el.find('.main-page').show();            
         }
      });
+    },
+
+    startMockNotifications: function() {
+      var _me = this;
+      
+      var options = {
+          type: "basic",
+          title: "You've got mail!",
+          message: "Meg Ryan sent you an InMail",
+          iconUrl: "img/linkedin_64x64.jpeg",
+          buttons: []
+      };      
+      var creationCallback = function() {
+        console.log("Notification shown");
+      };
+      window.setInterval(function() {
+        options.message = "Meg Ryan sent you an InMail at " + moment().format('h:mm A');
+        chrome.notifications.create(Math.random().toString(36).substring(7), options, creationCallback);
+      }, 30000);
     },
 
     updateOnlineStatus : function(event , _me) {
