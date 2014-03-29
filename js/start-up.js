@@ -68,7 +68,6 @@ require(["backbone",
 
     },
     initialize: function () {
-
         _.bindAll(this);
         this.feedListView = new FeedListView();
         this.shareNewPostView = new ShareNewPost();
@@ -90,6 +89,38 @@ require(["backbone",
             _me.$el.find('.main-page').show();            
           }
       });
+      window.addEventListener('offline',  function(event){
+        _me.updateOnlineStatus(event , _me)
+      });
+       window.addEventListener('online',  function(event){
+        _me.updateOnlineStatus(event , _me)
+       });      
+      chrome.storage.local.get("access_token" , function(data) {
+        access_token = data.access_token;
+        if(!access_token) {
+          _me.$el.find('.login-frame').show();
+          _me.$el.find('.main-page').hide();
+          
+        } else {
+          _me.$el.find('.login-frame').hide();
+          _me.$el.find('.main-page').show();            
+        }
+     });
+    },
+
+    updateOnlineStatus : function(event , _me) {
+        var condition = navigator.onLine ? "online" : "offline";
+        var network_status = $("#network-status");
+        if (condition === "online") {
+          network_status.hide();
+        }else{
+          network_status.show();
+        }
+        _me.getFromChrome("share" , function(pendingShares){
+          _me.postShare(pendingShares, function(err , response){
+            if (!err) console.log("Pending shares are published!");
+          })
+        })
     },
 
     renderUserFeed: function() {
@@ -133,7 +164,7 @@ require(["backbone",
       console.log("Got the following user info: " + response);
       var user_info = JSON.parse(response);
       this.populateUserInfo(user_info);
-      this.callback(user_info);
+      callback(user_info);
     } else {
       console.log('infoFetch failed', error, status);
       this.showButton(this.signin_button);
@@ -183,13 +214,14 @@ require(["backbone",
   // Handlers for the buttons's onclick events.
 
   interactiveSignIn: function() {
+    var _me = this;
     this.disableButton(this.signin_button);
     this.getToken(true, function(error, access_token) {
       if (error) {
         this.showButton(this.signin_button);
       } else {
-        this.$el.find('.login-frame').hide();
-        this.$el.find('.main-page').show();
+        _me.$el.find('.login-frame').hide();
+        _me.$el.find('.main-page').show();
         //getUserInfo(true);
       }
     });
@@ -222,6 +254,7 @@ require(["backbone",
     },
 
     postShare : function(postData , callback){
+        var _me = this;
       var xmlData = '<share>' +
                       '<comment>'+postData.comment +'</comment>'
                       '<content>'+
@@ -236,7 +269,7 @@ require(["backbone",
                     '</share>';
       if (navigator.onLine) {
         var url ='https://api.linkedin.com/v1/' + APICalls['share'];  
-          xhrInitialize('POST', url,  interactive, function(error, status, response){
+          _me.xhrInitialize('POST', url,  interactive, function(error, status, response){
             if (error) {
               callback(error);
             }else{
@@ -245,11 +278,12 @@ require(["backbone",
             }
           },xmlData);
       }else{
-        storeInChrome({"share" : xmlData});
+        _me.storeInChrome({"share" : xmlData});
       }
     },
 
     getJobSuggestions : function(callback){
+      var _me = this;
       if (navigator.onLine) {
         var format;
         if (APICalls['myJobSuggestions'].indexOf("?") >= 0) {
@@ -259,24 +293,25 @@ require(["backbone",
           format = "?format=json";
         }
         var url ='https://api.linkedin.com/v1/' + APICalls['myJobSuggestions'] + format;  
-          xhrInitialize('GET', url,  interactive, function(error, status, response){
+          _me.xhrInitialize('GET', url,  interactive, function(error, status, response){
             if (error) {
               callback(error);
             }else{
               var data = JSON.parse(response);
               callback(null , data);
 
-              storeInChrome({"job-suggestions" : data});
+              _me.storeInChrome({"job-suggestions" : data});
             }
           });
       }else{
-        getFromChrome("myJobSuggestions" , function(jobs){
+        _me.getFromChrome("myJobSuggestions" , function(jobs){
           callback(null , jobs);
         });
       }
     },
 
     getFeeds : function(callback){
+        var _me = this;
       if (navigator.onLine) {
         var format;
         if (APICalls['myNetworksUpdates'].indexOf("?") >= 0) {
@@ -292,17 +327,18 @@ require(["backbone",
             }else{
               var data = JSON.parse(response);
               callback(null , data);
-              storeInChrome({"feeds" : data});
+              _me.storeInChrome({"feeds" : data});
             }
           });
       }else{
-        getFromChrome("feeds" , function(feeds){
+        _me.getFromChrome("feeds" , function(feeds){
           callback(null , feeds);
         });
       }
     },
 
     getConnections : function(callback){
+        var _me = this;
         if (navigator.onLine) {
         var format;
         if (APICalls['myConnections'].indexOf("?") >= 0) {
@@ -319,17 +355,16 @@ require(["backbone",
               var data = JSON.parse(response);
               callback(null , data);
 
-              storeInChrome({"connections" : data});
+              _me.storeInChrome({"connections" : data});
             }
           });
       }else{
-        getFromChrome("connections" , function(connections){
+        _me.getFromChrome("connections" , function(connections){
           callback(null , connections);
         });
       }
     },
       getToken: function(interactive, callback) {
-        this.callback = callback;
         var _me = this;
         var options = {
           'interactive': interactive,
@@ -348,17 +383,17 @@ require(["backbone",
                   redirectUri);
 
               if (chrome.runtime.lastError) {
-                _me.callback(new Error(chrome.runtime.lastError));
+                callback(new Error(chrome.runtime.lastError));
                 return;
               }
               var matches = redirectUri.match(redirectRe);
               if (matches && matches.length > 1)
-                _me.handleProviderResponse(_me.parseRedirectFragment(matches[1]));
+                _me.handleProviderResponse(_me.parseRedirectFragment(matches[1]), callback);
               else
-                _me.callback(new Error('Invalid redirect URI'));
+                callback(new Error('Invalid redirect URI'));
             });
           }else{
-            _me.callback(null, access_token);
+            callback(null, access_token);
           }
         });
       },
@@ -376,19 +411,19 @@ require(["backbone",
           return values;
       },
 
-      handleProviderResponse: function(values) {
+      handleProviderResponse: function(values, callback) {
           console.log('providerResponse', values);
           if (values.hasOwnProperty('access_token'))
-            this.setAccessToken(values.access_token);
+            this.setAccessToken(values.access_token, callback);
           // If response does not have an access_token, it might have the code,
           // which can be used in exchange for token.
-          else if (values.hasOwnProperty('code'))
-            this.exchangeCodeForToken(values.code);
+          else if (values.hasOwnProperty('code'), callback)
+            this.exchangeCodeForToken(values.code, callback);
           else 
-            this.callback(new Error('Neither access_token nor code avialable.'));
+            callback(new Error('Neither access_token nor code avialable.'));
       },
 
-      exchangeCodeForToken: function(code) {
+      exchangeCodeForToken: function(code, callback) {
           var xhr = new XMLHttpRequest();
           var _me = this;
           xhr.open('GET',
@@ -405,23 +440,23 @@ require(["backbone",
               var response = JSON.parse(this.responseText);
               console.log(response);
               if (response.hasOwnProperty('access_token')) {
-                _me.setAccessToken(response.access_token);
+                _me.setAccessToken(response.access_token, callback);
               } else {
-                _me.callback(new Error('Cannot obtain access_token from code.'));
+                callback(new Error('Cannot obtain access_token from code.'));
               }
             } else {
               console.log('code exchange status:', this.status);
-              _me.callback(new Error('Code exchange failed'));
+              callback(new Error('Code exchange failed'));
             }
           };
           xhr.send();
       },
 
-      setAccessToken: function(token) {
+      setAccessToken: function(token, callback) {
             var _me = this;
           chrome.storage.local.set({'access_token': token}, function() {
             console.log('access_token saved');
-            _me.callback(null, access_token);
+            callback(null, token);
           });
       },
 
@@ -440,11 +475,11 @@ require(["backbone",
         this.xhrGetToken();   
     },
     
-    xhrGetToken: function() {
+    xhrGetToken: function(callback) {
       this.getToken(this.interactive, function(error, token) {
         console.log('token fetch', error, token);
         if (error) {
-          this.callback(error);
+          callback(error);
           return;
         }
         access_token = token;
