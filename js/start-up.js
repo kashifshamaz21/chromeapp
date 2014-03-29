@@ -71,7 +71,7 @@ require(["backbone",
         _.bindAll(this);
         this.feedListView = new FeedListView();
         this.shareNewPostView = new ShareNewPost();
-        $(".main-content").slimScroll({
+        $("#slim-scroll-id").slimScroll({
             height: "675px"
         });
         var _me = this;

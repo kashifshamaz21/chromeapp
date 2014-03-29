@@ -11,7 +11,7 @@ define(["jquery",
 
     var UserFeedListItem = Backbone.View.extend({
 
-        className: "feed-item",
+        className: "corgi_feed_well",
 
         events: {
         
