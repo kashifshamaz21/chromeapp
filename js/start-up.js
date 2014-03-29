@@ -1,9 +1,9 @@
-LinkedIn = {
+  LinkedIn = {
     checkConnectivity: function() {
-        var condition = navigator.onLine ? true : false;
-        return condition;
+      var condition = navigator.onLine ? true : false;
+      return condition;
     }
-};
+  };
   var clientId = '75jmcfi1tpfzxd';
   var clientSecret = 'mvqPSjN8oV9mML3k';
   var redirectUri = 'https://' + chrome.runtime.id +
@@ -236,7 +236,7 @@ require(["backbone",
                     '</share>';
       if (navigator.onLine) {
         var url ='https://api.linkedin.com/v1/' + APICalls['share'];  
-          xhrWithAuth('POST', url,  interactive, function(error, status, response){
+          xhrInitialize('POST', url,  interactive, function(error, status, response){
             if (error) {
               callback(error);
             }else{
@@ -259,7 +259,7 @@ require(["backbone",
           format = "?format=json";
         }
         var url ='https://api.linkedin.com/v1/' + APICalls['myJobSuggestions'] + format;  
-          xhrWithAuth('GET', url,  interactive, function(error, status, response){
+          xhrInitialize('GET', url,  interactive, function(error, status, response){
             if (error) {
               callback(error);
             }else{
@@ -292,7 +292,6 @@ require(["backbone",
             }else{
               var data = JSON.parse(response);
               callback(null , data);
-
               storeInChrome({"feeds" : data});
             }
           });
@@ -352,12 +351,6 @@ require(["backbone",
                 _me.callback(new Error(chrome.runtime.lastError));
                 return;
               }
-
-              // Upon success the response is appended to redirectUri, e.g.
-              // https://{app_id}.chromiumapp.org/provider_cb#access_token={value}
-              //     &refresh_token={value}
-              // or:
-              // https://{app_id}.chromiumapp.org/provider_cb#code={value}
               var matches = redirectUri.match(redirectRe);
               if (matches && matches.length > 1)
                 _me.handleProviderResponse(_me.parseRedirectFragment(matches[1]));
@@ -436,16 +429,15 @@ require(["backbone",
         if (access_token == token_to_remove)
           access_token = null;
       },
-    xhrInitialize: function(method, url, interactive, callback , callbackEXt) {
+    xhrInitialize: function(method, url, interactive, callback , postData) {
         this.retry = true;
         access_token = null;
         this.method = method;
         this.url = url;
         this.interactive = interactive;
         this.callback = callback;
-        this.callbackEXt = callbackEXt;
-        console.log('xhrWithAuth', method, url, interactive);
-        this.xhrGetToken();     
+        console.log('xhrInitialize', method, url, interactive);
+        this.xhrGetToken();   
     },
     
     xhrGetToken: function() {
@@ -464,9 +456,15 @@ require(["backbone",
     requestStart: function(finalUrl) {
       var xhr = new XMLHttpRequest();
       xhr.open(this.method, finalUrl);
-      //xhr.setRequestHeader('Authorization', 'Bearer ' + access_token);
-      xhr.onload = requestComplete;
-      xhr.send();
+      if (method === "POST") {
+        xhr.setRequestHeader('content-type', 'application/xml');
+      };
+      xhr.onload = this.requestComplete;
+      if (postData) {
+        xhr.send(postData);
+      }else{
+        xhr.send();
+      }
     },
 
     requestComplete: function() {
@@ -477,7 +475,7 @@ require(["backbone",
         access_token = null;
         this.getToken();
       } else {
-        this.callback(null, this.status, this.response , this.callbackEXt);
+        this.callback(null, this.status, this.response);
       }
     },
    renderUserFeed: function() {
