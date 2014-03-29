@@ -6,8 +6,9 @@ define(["jquery",
         "collections/feed-collection",
         "text!templates/job-post.html",
         "text!templates/new-profile-pic.html",
+        "text!templates/new-connection.html",
         "moment"
-        ], function($, _, Backbone, Controller, Feed, FeedCollection, JobFeed, NewProfilePic){
+        ], function($, _, Backbone, Controller, Feed, FeedCollection, JobFeed, NewProfilePic, NewConnection){
 
     var UserFeedListItem = Backbone.View.extend({
 
@@ -26,6 +27,7 @@ define(["jquery",
             switch(feedType) {
                 case "JOBP": this.renderJobPost(); break;
                 case "PICU":  this.NewProfilePic(); break;
+                case "CONN":  this.NewConnection(); break;
                 default:
                     console.log("feedType is ", feedType);
             }
@@ -49,8 +51,28 @@ define(["jquery",
             this.getImage(this.$el.find('.feed_profile_pic'), newPicUrl);
         },
 
+        NewConnection: function () {
+            
+            var person = this.model.get("updateContent").person;
+            var fullName = person.firstName + " " + person.lastName;
+            var myPicUrl = person.pictureUrl;
+            var friendPicUrl = person.connections.values[0].pictureUrl;
+            var friendName = person.connections.values[0].firstName + " " + person.connections.values[0].firstName;
+
+            this.$el.append(NewConnection);
+            this.$el.find("#person").text(fullName);
+            this.$el.find("#friend-name").text(friendName);
+            this.$el.find("#friend-job").text(person.connections.values[0].headline);
+            this.getImage(this.$el.find('#friend-pic'), friendPicUrl);
+            this.getImage(this.$el.find('.feed_profile_pic'), myPicUrl);
+            this.$el.find("#connected-time").text(moment(this.model.get("timestamp")).fromNow());
+        },
+
         getImage: function (parent, imageUrl) {
             var xhr = new XMLHttpRequest();
+            if(!imageUrl) {
+                imageUrl = "http://s.c.lnkd.licdn.com/scds/common/u/img/themes/katy/ghosts/profiles/ghost_profile_60x60_v1.png";
+            }
             xhr.open('GET', imageUrl, true);
             xhr.responseType = 'blob';
             xhr.onload = function(e) {

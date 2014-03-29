@@ -22,3 +22,7 @@
 #feed-list-wrapper {
 	margin-left: 83px;
 }
+
+#friend-pic , #friend-description {
+	display: inline-block;
+}

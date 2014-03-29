@@ -18,6 +18,7 @@ define(["jquery",
 
     	initialize: function(options) {
     		_.bindAll(this);
+            this.startUp = options.startUp;
     		this.collection = new FeedCollection();
             this.collection.bind("add", this.addOneFeed, this);
     	},
@@ -37,19 +38,23 @@ define(["jquery",
     	},
 
     	getJobUpdates: function() {
-    		Controller.getJobUpdates(this.getJobUpdatesSuccess, this.getJobUpdatesFailed);
+    		this.startUp.getFeeds(this.getJobUpdatesSuccess);
     	},
 
-    	getJobUpdatesSuccess: function(jobUpdates) {
-    		var newModels = [];
-    		_.each(jobUpdates.values, _.bind(function(update, index, updateList){ 
-    			var model =  new Feed(update);
-    			newModels.push(model);
-    		}, this));
-    		this.collection.set(newModels);
+    	getJobUpdatesSuccess: function(error, jobUpdates) {
+            if(!error) {
+                var newModels = [];
+                _.each(jobUpdates.values, _.bind(function(update, index, updateList){ 
+                    var model =  new Feed(update);
+                    newModels.push(model);
+                }, this));
+                this.collection.set(newModels);  
+            } else {
+                this.getJobUpdatesFailed();
+            }
     	},
 
-    	getJobUpdatesFailed: function (argument) {
+    	getJobUpdatesFailed: function () {
     		console.log("get job updates failed");
     	}
         

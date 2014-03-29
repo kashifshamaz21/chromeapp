@@ -18,6 +18,7 @@ define(["jquery",
 
     	initialize: function(options) {
     		_.bindAll(this);
+            this.startUp = options.startUp;
     	},
 
         render: function () {
@@ -36,6 +37,25 @@ define(["jquery",
               $(parent)[0].appendChild(img);
             };
             xhr.send();
+        },
+
+        postShare: function () {
+            var comment = $("#new-post-textarea").text();
+            if(comment !== '') {
+                this.startUp.postShare({
+                    comment: comment,
+                    title: "",
+                    description: "",
+                    commentUrl: "",
+                    imageUrl: ""
+                }, this.postSuccess);
+            }
+        },
+
+        postSuccess: function  (error, data) {
+            if(!error) {
+                $("#new-post-textarea").text("");   
+            }
         }
         
     });

@@ -69,8 +69,12 @@ require(["backbone",
     },
     initialize: function () {
         _.bindAll(this);
-        this.feedListView = new FeedListView();
-        this.shareNewPostView = new ShareNewPost();
+        this.feedListView = new FeedListView({
+            startUp: this
+        });
+        this.shareNewPostView = new ShareNewPost({
+            startUp: this
+        });
         $("#slim-scroll-id").slimScroll({
             height: "675px"
         });
@@ -124,7 +128,7 @@ require(["backbone",
     },
 
     renderUserFeed: function() {
-            this.feedListView.render();
+        this.feedListView.render();
     },
 
     renderPostUpdateView: function () {
@@ -321,7 +325,7 @@ require(["backbone",
           format = "?format=json";
         }
         var url ='https://api.linkedin.com/v1/' + APICalls['myNetworksUpdates'] + format;  
-          this.xhrInitialize('GET', url,  interactive, function(error, status, response){
+          this.xhrInitialize('GET', url,  false, function(error, response){
             if (error) {
               callback(error);
             }else{
@@ -471,11 +475,13 @@ require(["backbone",
         this.url = url;
         this.interactive = interactive;
         this.callback = callback;
+        this.postData = postData;
         console.log('xhrInitialize', method, url, interactive);
         this.xhrGetToken();   
     },
     
     xhrGetToken: function(callback) {
+        var _me = this;
       this.getToken(this.interactive, function(error, token) {
         console.log('token fetch', error, token);
         if (error) {
@@ -483,36 +489,36 @@ require(["backbone",
           return;
         }
         access_token = token;
+
         var finalUrl = _me.url + "&oauth2_access_token=" + token
-        this.requestStart(finalUrl);
+        _me.requestStart(finalUrl);
+
       });
     },
 
     requestStart: function(finalUrl) {
-      var xhr = new XMLHttpRequest();
-      xhr.open(this.method, finalUrl);
-      if (thid.method === "POST") {
-        xhr.setRequestHeader('content-type', 'application/xml');
+      var _me = this;
+      _me.xhr = new XMLHttpRequest();
+      _me.xhr.open(this.method, finalUrl);
+      if (this.method === "POST") {
+        _me.xhr.setRequestHeader('content-type', 'application/xml');
       };
-      xhr.onload = this.requestComplete;
-      if (postData) {
-        xhr.send(postData);
+      _me.xhr.onload = this.requestComplete;
+      if (_me.postData) {
+        _me.xhr.send(_me.postData);
       }else{
-        xhr.send();
+        _me.xhr.send();
       }
     },
 
-    requestComplete: function() {
-      console.log('requestComplete', this.status, this.response);
-      if ( ( this.status < 200 || this.status >=300 ) && retry) {
-        this.retry = false;
-        this.removeCachedToken(access_token);
-        access_token = null;
-        this.getToken();
-      } else {
-        this.callback(null, this.status, this.response);
-      }
+    requestComplete: function(e) {
+      console.log('requestComplete', this.xhr.status, this.xhr.response);
+        if (this.xhr.status >199 && 300 > this.xhr.status) {
+        this.callback(null , this.xhr.response);            
+        };
+
     },
+
    renderUserFeed: function() {
         this.feedListView.render();
     }
